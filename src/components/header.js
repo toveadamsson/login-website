@@ -5,7 +5,7 @@ function Header() {
   return (
     <div className="header-container">
       <h1>Website-name</h1>
-      <div class="header-buttons">
+      <div className="header-buttons">
         <Link to="/">
           <button>LOGIN</button>
         </Link>
