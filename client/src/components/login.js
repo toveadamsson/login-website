@@ -2,35 +2,34 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import useToken from "./useToken.js";
 
-async function loginUser(credentials) {
-  console.log(JSON.stringify(credentials))
-  // credentials are the user input, username and password.
-  return fetch("http://localhost:8080/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  }).then((data) => data.json()); //the object provided from res.send(containing the key "token")
-}
 
 function Login() {
   const { setToken } = useToken();
-  const [username, setUserName] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  // const [id, setId] = useState()
-
   let history = useHistory();
-
-  // handleSubmit will call loginUser with the username and password, it will setToken if it's success. (in this case, prefixed test321)
+// ======================================
+  async function loginUser({email, password}) {
+    // credentials is the {email, password} from below
+    console.log(JSON.stringify({ email, password}));
+    // credentials are the user input, email and password.
+    return fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email, password}),
+    }).then((data) => data.json()); //the object provided from res.send(containing the key "token")
+  }
+  // handleSubmit will call loginUser with the email and password, it will setToken if it's success. (in this case, prefixed test321)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginUser({
-      username,
+      email,
       password,
-      // id
+      // id eventually password.hash
     });
-    
+
     setToken(token);
     if (token) {
       history.push("./secret-page");
@@ -41,13 +40,13 @@ function Login() {
     <div className="front-container">
       <form onSubmit={handleSubmit}>
         <input
-        name="username"
+          name="email"
           type="text"
           placeholder="Email"
-          onChange={(e) => setUserName(e.target.value)} //triggered by the user input
+          onChange={(e) => setEmail(e.target.value)} //triggered by the user input
         />
         <input
-        name="password"
+          name="password"
           type="text"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)} //triggered by the user input
@@ -58,7 +57,5 @@ function Login() {
     </div>
   );
 }
-
-
 
 export default Login;

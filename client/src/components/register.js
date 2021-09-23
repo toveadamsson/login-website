@@ -1,41 +1,29 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router";
-// import axios from "axios"
-function Register() {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [password2, setPassword2] = useState("");
 
+function Register() {
   const [formValues, setValues] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  //   let history = useHistory();
-  // //*=========================
-  //   const test = async () => {
-  //     if(form.password.length  < 8){
-  //       return Alert.alert('password needs to have min 8 characters')
-  //     }
-  //     try {
-  //       const response = await axios.post(
-  //         "/users/register",
-  //         {username,email,password,password2}
-  //       );
-  //    //! insert some validation and push to mongodb?
-  //       if (response.data.ok) return  history.push("./login");;
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-
+  async function registerUser({name, email, password}) {
+    // this is an async function because we don't know how long it's going to take for the operation to finish.
+    // credentials are the user input, email and password.
+    return fetch("http://localhost:8080/register", {
+      // fetch=make request/send request somewhere, in this case, the localhost...
+      method: "POST", // different ways of sending the requested data. Get, Delete etc
+      headers: {
+        "Content-Type": "application/json", // we clarify that we are sending a json form
+      },
+      body: JSON.stringify({name, email, password}), // We are transforming what we are sending to JSON
+    }).then((data) => data.json()); //the object provided from res.send(containing the key "token")
+    // data = it's what we know from the server.js, register endpoint. res.send({})
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // by adding preventDefault, we are preventing the browser from making a request with the information in the form.
     let errorMessages = [];
     let regex = /^[A-Za-z]\w{5,17}$/;
     if (formValues.password.match(regex) === null) {
@@ -51,25 +39,25 @@ function Register() {
     if (errorMessages.length > 0) {
       alert(errorMessages);
     } else {
-      alert("SUCCESS")
+      // we are now connecting to the backend
+      // send a req to the endpoint in the backend
     }
-
   };
 
   return (
     <form className="register-container" onSubmit={handleSubmit}>
       <input
         required
-        value={formValues.username}
-        // onChange={(e) => setUsername(e.target.value)}
+        value={formValues.name}
+        // onChange={(e) => setName(e.target.value)}
         onChange={(event) =>
-          setValues({ ...formValues, username: event.target.value })
+          setValues({ ...formValues, name: event.target.value })
         }
         // onChange property allows us to manage whatever happens when the text in the input is changing, when the user writes.
         // to get the input from the user, we define a function, in this case it's the event. So everytime this function is called, we get an event ( every key the user presses ).
-        // setValues will be updating the username-value to a new username-value.
-        placeholder="Username *"
-        id="username"
+        // setValues will be updating the name-value to a new name-value.
+        placeholder="Name *"
+        id="name"
       ></input>
       <input
         type="email"

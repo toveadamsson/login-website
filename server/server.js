@@ -14,47 +14,43 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 // CORS stands for Cross-Origin Resource Sharing. It allows us to relax the security applied to an API. This is done by bypassing the Access-Control-Allow-Origin headers, which specify which origins can access the API. In other words, CORS is a browser security feature that restricts cross-origin HTTP requests with other servers and specifies which domains access your resources.
 //An API is a set procedure for two programs to communicate, server and client
+
 // let history = useHistory();
 
 app.post("/register", async (req, res) => {
-  const {
-    username,
-    email,
-    password,
-    password2
-  } = req.body;
-
+  const { name, email, password } = req.body;
+  // req.body is the what we receive from the front-end: body: JSON.stringify({name, email, password}). We need these to be a match to create a user.
   try {
     const client = await clientPromise;
     await client.connect();
-    let user = await client
+
+    let existingUser = await client.db().collection("users").findOne({ email });
+    if (existingUser) {
+      return res.json({
+        // The function returns at this point, and all the code after this will not be executed.
+        message: "email is already in use",
+        success: false,
+      });
+    }
+    // =============================
+    // to access MongoDB, we need to use the same path when trying to find one.
+    const newUser = {
+      name,
+      email,
+      password,
+    };
+    let insertedUser = await client // here we send a new user to mongoDB
       .db()
       .collection("users")
-      .insertOne({
-    username,
-    email,
-    password,
-    password2,
-    _id //! should i insert the id or will it be created when a new user is added
-  });
-
+      .insertOne(newUser);
     // if the user is found => return the token
-    console.log("user", user);
-    if (user) {
-      res.send({
+    // console.log("user", insertedUser);
+    return res.send({
+      success: true,
+      //! Do i want to insert history.push here eventually to login page?
+    });
 
-        success: true,
-        //! Next step here would be to register the user in MongoDB?
-       //! Do i want to insert history.push here?
-      });
-    }
-    else {
-      // otherwise we return error => credentials are not valid
-      res.send({
-        success: false,
-        alert()
-      });
-    }
+    // =============================
   } catch (error) {
     return res.json({
       message: new Error(error).message,
@@ -65,9 +61,10 @@ app.post("/register", async (req, res) => {
 
 //!______________________________________
 app.post("/login", async (req, res) => {
-  // extract username and password from the body of the request
-  const { username: bodyUsername, password: bodyPassword } = req.body;
-  // find a user with that username and password
+  // extract email and password from the body of the request
+  const { email: bodyEmail, password: bodyPassword } = req.body;
+  // find a user with that email and password
+  //*------------ from monday 
   try {
     const client = await clientPromise;
     await client.connect();
@@ -88,7 +85,7 @@ app.post("/login", async (req, res) => {
       .db()
       .collection("users")
       .findOne({
-        username: { $eq: bodyUsername },
+        email: { $eq: bodyEmail },
         password: { $eq: bodyPassword },
       });
 
@@ -123,7 +120,7 @@ app.use(
     try {
       const client = await clientPromise;
       await client.connect();
-      console.log("req", req);
+      console.log("req ==>", req);
 
       // client.db() will be the default database passed in the MONGODB_URI
       // You can change the database by calling the client.db() function and specifying a database like:
@@ -149,6 +146,8 @@ app.use(
   // return them
 );
 
-app.listen(8080, () =>
-  console.log("API is running on http://localhost:8080/login")
+app.listen(
+  8080,
+  () => console.log("API is running on http://localhost:8080/login")
+  //! change login to nothing, just /?
 );
