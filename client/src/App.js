@@ -8,14 +8,25 @@ import Login from "./components/login.js";
 import PrivateRoute from "./components/privateRoute.js";
 //*==============================
 import "./App.css";
+import useToken from "./components/useToken.js";
 //*==============================
 
 function App() {
+
+  const { token } = useToken()
+
+  // truthy values
+  // falsy values: undefined, null, 0...
+  const isLoggedIn = token !== undefined
+  // const isLoggedIn = boolean(token)
+  
+
   
   return (
     <Router>
       <div className="App">
-        <Header />
+      
+        <Header isLoggedIn={isLoggedIn} /> 
         <Switch>
           <Route exact path="/">
             <Login />

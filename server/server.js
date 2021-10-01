@@ -17,16 +17,17 @@ app.use(cors());
 
 // let history = useHistory();
 
+// app.post = preparing an address (endpoint) for accepting / listening for calls being made to this endpoint.
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
   // req.body is the what we receive from the front-end: body: JSON.stringify({name, email, password}). We need these to be a match to create a user.
   try {
-    const client = await clientPromise;
-    await client.connect();
+    const mongoDBclient = await clientPromise; // receiving from the mongodb.
+    // await mongoDBclient.connect();
 
-    let existingUser = await client.db().collection("users").findOne({ email });
+    let existingUser = await mongoDBclient.db().collection("users").findOne({ email });
     if (existingUser) {
-      return res.json({
+      return res.json({ 
         // The function returns at this point, and all the code after this will not be executed.
         message: "email is already in use",
         success: false,
@@ -39,7 +40,7 @@ app.post("/register", async (req, res) => {
       email,
       password,
     };
-    let insertedUser = await client // here we send a new user to mongoDB
+    let insertedUser = await mongoDBclient // here we send a new user to mongoDB
       .db()
       .collection("users")
       .insertOne(newUser);
@@ -64,10 +65,11 @@ app.post("/login", async (req, res) => {
   // extract email and password from the body of the request
   const { email: bodyEmail, password: bodyPassword } = req.body;
   // find a user with that email and password
-  //*------------ from monday 
+  //*------------ for TUESDAY
+
   try {
-    const client = await clientPromise;
-    await client.connect();
+    const mongoDBclient = await clientPromise;
+    await mongoDBclient.connect();
     // invoking a function that client.connect provides. It will try and connect to the database.
     // client.db() will be the default database passed in the MONGODB_URI
     // You can change the database by calling the client.db() function and specifying a database like:
@@ -81,7 +83,7 @@ app.post("/login", async (req, res) => {
     // in this case, the defaultDB is login-website. You do this when you're using one website.
     // let usersCollection = await defaultDatabase.collection("users");
     // let foundUsers = await usersCollection.find({}).toArray();
-    let user = await client
+    let user = await mongoDBclient
       .db()
       .collection("users")
       .findOne({
@@ -90,7 +92,7 @@ app.post("/login", async (req, res) => {
       });
 
     // if the user is found => return the token
-    console.log("user", user);
+    // console.log("user", user);
     if (user) {
       res.send({
         token: "test-token",
@@ -118,9 +120,9 @@ app.use(
   async (req, res) => {
     // step one, get all the users from the db
     try {
-      const client = await clientPromise;
-      await client.connect();
-      console.log("req ==>", req);
+      const mongoDBclient = await clientPromise;
+      await mongoDBclient.connect();
+      // console.log("req ==>", req);
 
       // client.db() will be the default database passed in the MONGODB_URI
       // You can change the database by calling the client.db() function and specifying a database like:
@@ -129,7 +131,7 @@ app.use(
       // db.find({}) or any of the MongoDB Node Driver commands
 
       // fetch the posts
-      let users = await client.db().collection("users").find({}).toArray();
+      let users = await mongoDBclient.db().collection("users").find({}).toArray();
       // return the posts
       return res.json({
         message: JSON.parse(JSON.stringify(users)),

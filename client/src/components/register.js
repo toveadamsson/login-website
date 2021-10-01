@@ -8,7 +8,7 @@ function Register() {
     password2: "",
   });
 
-  async function registerUser({name, email, password}) {
+  async function registerUser({ name, email, password }) {
     // this is an async function because we don't know how long it's going to take for the operation to finish.
     // credentials are the user input, email and password.
     return fetch("http://localhost:8080/register", {
@@ -17,8 +17,14 @@ function Register() {
       headers: {
         "Content-Type": "application/json", // we clarify that we are sending a json form
       },
-      body: JSON.stringify({name, email, password}), // We are transforming what we are sending to JSON
-    }).then((data) => data.json()); //the object provided from res.send(containing the key "token")
+      body: JSON.stringify({ name, email, password }), // We are transforming what we are sending to JSON
+    }).then((data) => {
+      // return a promise
+      data.json().then((jsonResult) => {
+        console.log(jsonResult);
+      });
+      // return data.json();
+    }); //the object provided from res.send(containing the key "token")
     // data = it's what we know from the server.js, register endpoint. res.send({})
   }
 
@@ -39,6 +45,8 @@ function Register() {
     if (errorMessages.length > 0) {
       alert(errorMessages);
     } else {
+      // registerUser({name: formValues.name, email: formValues.email, password: formValues.password});
+      registerUser({...formValues});
       // we are now connecting to the backend
       // send a req to the endpoint in the backend
     }

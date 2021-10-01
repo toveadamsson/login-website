@@ -13,7 +13,7 @@ export default function useToken() {
 
     // return userToken ? userToken.token : userToken;    
     
-    return userToken?.token; // (if userToken variable is undefined, it will not access the token property)
+    return userToken; // (if userToken variable is undefined, it will not access the token property)
   };
   // You need to use the optional chaining operator—?.—when accessing the token property because when you first access the application, the value of sessionStorage.getItem('token') will be undefined. If you try to access a property, you will generate an error.
 
