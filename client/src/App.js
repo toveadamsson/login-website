@@ -8,7 +8,6 @@ import Login from "./components/login.js";
 import PrivateRoute from "./components/privateRoute.js";
 //*==============================
 import "./App.css";
-// import './App.scss';
 //*======================== 
 import useToken from "./components/useToken.js";
 //*==============================
@@ -18,7 +17,7 @@ function App() {
 
   // truthy values
   // falsy values: undefined, null, 0...
-  const isLoggedIn = token !== undefined;
+  const isLoggedIn = token !== null;
   // const isLoggedIn = boolean(token)
 
   return (

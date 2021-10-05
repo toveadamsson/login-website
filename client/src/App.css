@@ -107,26 +107,26 @@ input::placeholder {
     height: 300px;
     box-sizing: border-box;
     display: grid;
-    /* background-color: rebeccapurple; */
+    background-color: rebeccapurple;
   }
   .header-container h1 {
     padding: 10px;
     font-size: 2.5rem;
   }
   .header-buttons {
-    /* background-color: blue; */
+    background-color: blue;
     display: grid;
     grid-template-rows: 50%50%;
     width: 100%;
     justify-items: center;
   }
   .front-container {
-    /* background-color: red; */
+    background-color: red;
     display: flex;
     flex-direction: row;
   }
   .front-container form {
-    /* background-color: green; */
+    background-color: green;
     width: 100%;
     display: grid;
     grid-template-rows: 50%50%;

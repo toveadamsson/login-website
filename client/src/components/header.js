@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Header({isLoggedIn}) {
-  // let isLoggedIn = true;
 
   return (
     <div className="header-container">

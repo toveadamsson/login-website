@@ -21,7 +21,7 @@ function Login() {
       body: JSON.stringify({email, password}),
     }).then((data) => { return data.json()}); //the object provided from res.send(containing the property "token" and "success") data = token and success. could also be written as data.json()
   }
-  // handleSubmit will call loginUser with the email and password, it will setToken if it's success. (in this case, prefixed test321)
+  // handleSubmit will call loginUser with the email and password, it will saveToken if it's success. (in this case, prefixed test321)
 
 
   // (event) is the paramater that receives an object with the event that got triggered, in this case it's the submit event in the form.
@@ -36,7 +36,7 @@ function Login() {
     });
 
     if (success){
-       setToken(token);
+      setToken(token);
       history.push("./secret-page");
   }
   };
