@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import useToken from "./useToken.js";
+// import useToken from "./useToken.js";
 
  
-function Login() {
-  const { setToken } = useToken();
+function Login({setToken}) {
+  // const { setToken } = useToken();
+  // we are using this useToken hook in both login.js and app.js and they are both creating a separate state, and are not connected. 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   let history = useHistory();

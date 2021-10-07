@@ -18,6 +18,8 @@ export default function useToken() {
   // You need to use the optional chaining operator—?.—when accessing the token property because when you first access the application, the value of sessionStorage.getItem('token') will be undefined. If you try to access a property, you will generate an error.
 
   const [token, setToken] = useState(getToken()); // By using the getToken function, it sets the token as the initial state.
+  // both app.js and login.js are using this state hook.
+  // in order for them both to be working correctly, they should be connected
 
   const saveToken = (userToken) => {
     sessionStorage.setItem("token", JSON.stringify(userToken)); // Store(save) the token in to sessionStorage, converting it to a string. A string version of the object.
