@@ -20,5 +20,4 @@ function SecretPage({deleteToken}) {
     </div>
   );
 }
-
 export default SecretPage;
