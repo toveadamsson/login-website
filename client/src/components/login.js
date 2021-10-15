@@ -37,6 +37,7 @@ function Login({setToken}) {
     });
 
     if (success){
+      alert("Login successfull")
       setToken(token);
       history.push("./secret-page");
   }

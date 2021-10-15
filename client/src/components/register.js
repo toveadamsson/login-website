@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 
 function Register() {
   const [formValues, setValues] = useState({
@@ -7,6 +8,7 @@ function Register() {
     password: "",
     password2: "",
   });
+  let history = useHistory();
 
   async function registerUser({ name, email, password }) {
     // this is an async function because we don't know how long it's going to take for the operation to finish.
@@ -47,6 +49,8 @@ function Register() {
     } else {
       // registerUser({name: formValues.name, email: formValues.email, password: formValues.password});
       registerUser({...formValues});
+      alert("registration successful")
+      history.push("./");
       // we are now connecting to the backend
       // send a req to the endpoint in the backend
     }
