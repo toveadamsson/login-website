@@ -37,9 +37,12 @@ function Login({setToken}) {
     });
 
     if (success){
-      alert("Login successfull")
+      alert("Login successful")
       setToken(token);
       history.push("./secret-page");
+  }else{
+    alert("Either email or password is wrong or there is no member with this email")
+
   }
   };
 
