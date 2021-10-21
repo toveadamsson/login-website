@@ -46,6 +46,7 @@ app.post("/register", async (req, res) => {
       .insertOne(newUser);
     // if the user is found => return the token
     // console.log("user", insertedUser);
+    res.setHeader('Access-Control-Allow-Origin', '*')
     return res.send({
       success: true,
       //! Do i want to insert history.push here eventually to login page?
@@ -93,6 +94,7 @@ app.post("/login", async (req, res) => {
 
     // if the user is found => return the token
     // console.log("user", user);
+    res.setHeader('Access-Control-Allow-Origin', '*')
     if (user) {
       res.send({
         token: "test-token",
