@@ -14,7 +14,7 @@ function Login({setToken}) {
     // credentials is the {email, password} from below
     // console.log(JSON.stringify({ email, password}));
     // credentials are the user input, email and password.
-    return fetch("http://localhost:8080/login", {
+    return fetch("https://login-website-neon.vercel.app:8080/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
