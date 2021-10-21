@@ -159,7 +159,7 @@ input::placeholder {
   font-size: 2rem;
 }
 .header-container h1:hover {
-
+border:none;
 } 
 button {
   font-size: 1rem;
