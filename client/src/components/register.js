@@ -13,7 +13,9 @@ function Register() {
   async function registerUser({ name, email, password }) {
     // this is an async function because we don't know how long it's going to take for the operation to finish.
     // credentials are the user input, email and password.
-    return fetch("https://login-website-neon.vercel.app:8080/register", {
+  
+  const baseUrl = process.env.REACT_APP_API_BASE_URL
+    return fetch(`${baseUrl}:8080/register`, {
       // fetch=make request/send request somewhere, in this case, the localhost...
       method: "POST", // different ways of sending the requested data. Get, Delete etc
       headers: {
