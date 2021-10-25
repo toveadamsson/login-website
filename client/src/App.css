@@ -97,6 +97,7 @@ button {
   border: transparent;
   font-size: 20px;
   border-radius: 50px;
+  color: black;
 }
 button:hover {
   background-color: beige;
