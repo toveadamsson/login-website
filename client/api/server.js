@@ -25,9 +25,12 @@ app.post("/register", async (req, res) => {
     const mongoDBclient = await clientPromise; // receiving from the mongodb.
     // await mongoDBclient.connect();
 
-    let existingUser = await mongoDBclient.db().collection("users").findOne({ email });
+    let existingUser = await mongoDBclient
+      .db()
+      .collection("users")
+      .findOne({ email });
     if (existingUser) {
-      return res.json({ 
+      return res.json({
         // The function returns at this point, and all the code after this will not be executed.
         message: "email is already in use",
         success: false,
@@ -46,12 +49,11 @@ app.post("/register", async (req, res) => {
       .insertOne(newUser);
     // if the user is found => return the token
     // console.log("user", insertedUser);
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader("Access-Control-Allow-Origin", "*");
     return res.send({
       success: true,
       //! Do i want to insert history.push here eventually to login page?
     });
-
     // =============================
   } catch (error) {
     return res.json({
@@ -60,14 +62,12 @@ app.post("/register", async (req, res) => {
     });
   }
 });
-
 //!______________________________________
 app.post("/login", async (req, res) => {
   // extract email and password from the body of the request
   const { email: bodyEmail, password: bodyPassword } = req.body;
   // find a user with that email and password
   //*------------ for TUESDAY
-
   try {
     const mongoDBclient = await clientPromise;
     await mongoDBclient.connect();
@@ -94,7 +94,7 @@ app.post("/login", async (req, res) => {
 
     // if the user is found => return the token
     // console.log("user", user);
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader("Access-Control-Allow-Origin", "*");
     if (user) {
       res.send({
         token: "test-token",
@@ -133,7 +133,11 @@ app.use(
       // db.find({}) or any of the MongoDB Node Driver commands
 
       // fetch the posts
-      let users = await mongoDBclient.db().collection("users").find({}).toArray();
+      let users = await mongoDBclient
+        .db()
+        .collection("users")
+        .find({})
+        .toArray();
       // return the posts
       return res.json({
         message: JSON.parse(JSON.stringify(users)),

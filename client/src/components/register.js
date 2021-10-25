@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-
 import dotenv from "dotenv";
 dotenv.config()
+
 
 function Register() {
   const [formValues, setValues] = useState({

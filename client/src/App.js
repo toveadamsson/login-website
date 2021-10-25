@@ -5,6 +5,7 @@ import Header from "./components/header.js";
 import Register from "./components/register.js";
 import SecretPage from "./components/secret-page.js";
 import Login from "./components/login.js";
+import Logout from "./components/logout.js"
 import PrivateRoute from "./components/privateRoute.js";
 //*==============================
 import "./App.css";
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route exact path="/register">
             <Register />
+          </Route>
+          <Route exact path="/logout">
+            <Logout />
           </Route>
           <PrivateRoute exact path="/secret-page">
             <SecretPage deleteToken={deleteToken} />

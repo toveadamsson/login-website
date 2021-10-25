@@ -1,3 +1,66 @@
+/* 
+
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-items: center;
+  font-size: 22px;
+  max-width: 500px;
+  min-height: 672px;
+  margin: 0 auto;
+  border-radius: 25px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.logout > input {
+  margin-top: 200px;
+}
+
+input {
+  margin: 0 auto;
+  background-color: black;
+  opacity: 50%;
+  color: white;
+  margin-top: 10px;
+  width: 300px;
+  height: 59px;
+  font-size: 22px;
+  margin-bottom: 14px;
+  max-width: 527px;
+  padding: 0 10%;
+}
+
+.pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+}
+
+i {
+  position: absolute;
+  top: 38%;
+  right: 16%;
+}
+i:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}
+
+button {
+  width: 300px;
+  height: 50px;
+  margin: 0 auto;
+}
+ */
+
+
+
+
+
+
 * {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -37,7 +100,6 @@ button {
 }
 button:hover {
   background-color: beige;
-  border: 1px solid white;
 }
 /*?========================*/
 .register-container,
@@ -76,8 +138,8 @@ input::placeholder {
 .register-container button,
 .front-container button {
   width: 6rem;
-  margin-top: 10px;
-  padding: 10px;
+  /* margin-top: 10px;
+  padding: 10px; */
   font-size: 15px;
   color: black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
