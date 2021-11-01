@@ -21,7 +21,8 @@ function Login({setToken}) {
     // const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
 
     // console.log(baseUrl)
-    // baseUrl is teh base url for the endpoints. 
+    // baseUrl is teh base url for the endpoints.
+    console.log('URL', URL) ;
     return fetch(`${URL}/login`, {
       // return fetch(`${baseUrl}:8080/login`, {
       method: "POST",
