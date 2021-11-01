@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 // import useToken from "./useToken.js";
+import { URL } from '../config'
 import dotenv from "dotenv";
 dotenv.config()
 
- 
+
 function Login({setToken}) {
   // const { setToken } = useToken();
   // we are using this useToken hook in both login.js and app.js and they are both creating a separate state, and are not connected. 
@@ -16,10 +17,13 @@ function Login({setToken}) {
     // credentials is the {email, password} from below
     // console.log(JSON.stringify({ email, password}));
     // credentials are the user input, email and password.
-    const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
-    console.log(baseUrl)
+
+    // const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
+
+    // console.log(baseUrl)
     // baseUrl is teh base url for the endpoints. 
-    return fetch(`${baseUrl}:8080/login`, {
+    return fetch(`${URL}/login`, {
+      // return fetch(`${baseUrl}:8080/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import dotenv from "dotenv";
+import { URL } from "../config"
 dotenv.config()
-
 
 function Register() {
   const [formValues, setValues] = useState({
@@ -17,8 +17,9 @@ function Register() {
     // this is an async function because we don't know how long it's going to take for the operation to finish.
     // credentials are the user input, email and password.
   
-  const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
-    return fetch(`${baseUrl}:8080/register`, {
+  // const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
+    // return fetch(`${baseUrl}:8080/register`, {
+      return fetch(`${URL}/register`, {
       // fetch=make request/send request somewhere, in this case, the localhost...
       method: "POST", // different ways of sending the requested data. Get, Delete etc
       headers: {
