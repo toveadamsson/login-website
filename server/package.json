@@ -1,12 +1,22 @@
 {
+  "name": "login-website-server",
+  "version": "1.0.0",
+  "description": "This is the server part for a login website",
+
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongodb": "^4.1.2"
+    "mongodb": "^4.1.2",
+    "path": "^0.12.7"
   },
   "type": "module",
   "scripts": {
-    "start": "set NODE_ENV=dev && nodemon server.js"
+    "dev": "set NODE_ENV=dev && nodemon server.js",
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": "14.x"
   }
 }
