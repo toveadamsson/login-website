@@ -42,11 +42,11 @@ function Register() {
     let regex = /^[A-Za-z]\w{5,17}$/;
     if (formValues.password.match(regex) === null) {
       errorMessages.push(
-        "password needs to contain one lower case, one upper case and between 6-16 characters"
+        "Password needs to be at least 7 characters with one Lower case & one Upper case"
       );
     }
     if (!(formValues.password === formValues.password2)) {
-      errorMessages.push("passwords does not match");
+      errorMessages.push("Passwords does not match");
     }
     console.log("error message containing:", errorMessages);
 
