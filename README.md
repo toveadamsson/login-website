@@ -78,7 +78,7 @@
     <img src="/images/website-screen.jpeg" alt="Logo" width="400" height="300">
   </a> -->
   ![Website Logo](client/public/screenshot1.png)
- ![Website Logo](public/screenshot2.png)
+ ![Website Logo](client/public/screenshot2.png)
 
 
   Thank you for visiting! 
