@@ -6,7 +6,7 @@ function Header({isLoggedIn}) {
 
   return (
     <div className="header-container">
-      <h1>Website-name</h1>
+      <h1>Login Website</h1>
       <div className="header-buttons">
         {!isLoggedIn && (
           <>

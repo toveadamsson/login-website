@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url); //import.meta.url is the filename
 const __dirname = path.dirname(__filename); // dirname stands for directoryname
+//__dirname is an environment variable that tells you the absolute path of the directory containing the currently executing file.
 // const path = require('path');
 // import { useHistory } from "react-router";
 // import bodyParser from "body-parser";
