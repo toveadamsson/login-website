@@ -23,7 +23,7 @@
 
 
   Thank you for visiting! 
-  My login website, options for the user to login or register. If login is successful, the user recieves a token and get redirected to a secret page.
+  My login website, options for the user to login or register. If login is successful, the user receives a token and get redirected to a secret page.
 
 ## Getting Started
 

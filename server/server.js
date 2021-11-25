@@ -111,6 +111,8 @@ app.post("/login", async (req, res) => {
       res.send({
         token: "test-token",
         success: true,
+        //response to inside login.js in the const { success, token }await loginUser()
+        name: user.name
       });
     }
     //response with sending the key.

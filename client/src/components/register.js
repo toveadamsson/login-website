@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import dotenv from "dotenv";
-import { URL } from "../config"
-dotenv.config()
+import { URL } from "../config";
+dotenv.config();
 
 function Register() {
   const [formValues, setValues] = useState({
@@ -16,11 +16,11 @@ function Register() {
   async function registerUser({ name, email, password }) {
     // this is an async function because we don't know how long it's going to take for the operation to finish.
     // credentials are the user input, email and password.
-  
-  // const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
+
+    // const baseUrl = process.env.REACT_APP_API_BASE_URL || process.env.API_BASE_URL || "https://login-website-neon.vercel.app"
     // return fetch(`${baseUrl}:8080/register`, {
-      return fetch(`${URL}/register`, {
-      // fetch=make request/send request somewhere, in this case, the localhost...
+    return fetch(`${URL}/register`, {
+      // fetch = make request/send request somewhere, in this case, the localhost...
       method: "POST", // different ways of sending the requested data. Get, Delete etc
       headers: {
         "Content-Type": "application/json", // we clarify that we are sending a json form
@@ -54,8 +54,8 @@ function Register() {
       alert(errorMessages);
     } else {
       // registerUser({name: formValues.name, email: formValues.email, password: formValues.password});
-      registerUser({...formValues});
-      alert("registration successful")
+      registerUser({ ...formValues });
+      alert("registration successful");
       history.push("./");
       // we are now connecting to the backend
       // send a req to the endpoint in the backend
